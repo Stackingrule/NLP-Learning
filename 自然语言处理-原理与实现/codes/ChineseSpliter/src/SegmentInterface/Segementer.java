@@ -2,7 +2,7 @@ package SegmentInterface;
 import SegmentInterface.ChineseSpliter;
 
 import java.util.List;
-
+/*
 public class Segementer {
     private String text;
     public void Segementer(String text) {
@@ -15,3 +15,5 @@ public class Segementer {
         System.out.println(word);
     }
 }
+
+ */
