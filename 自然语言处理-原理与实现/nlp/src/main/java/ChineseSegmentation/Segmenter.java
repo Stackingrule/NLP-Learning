@@ -2,6 +2,7 @@ package ChineseSegmentation;
 
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
@@ -29,15 +30,44 @@ public class Segmenter {
                 String key = st.nextToken();
                 TSTNode endNode = createNode(key);
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            read.close();   //关闭读入流
+            return.close;
         }
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
+    } catch (IOException e) {
+        e.printStackTrace();
     }
 
-    //TODO
+
+
     public String nextWord() {  //得到下一个词，如果没有则返回null
-        return null;
+
+        String word = null; //候选最长词
+        if (text == null || root == null) {
+            return word;
+        }
+        if (offset >= text.length()) {  //已经·处理完毕
+            return word;
+        }
+
+        TSTNode curNode = root; //从根节点开始
+        int charIndex = offset; //待切分字符串的处理开始位置
+        while (true) {
+            if (curNode == null) {
+                if (word == null) { //没有匹配上，则按照单字切分
+                    word = text.substring(offset, offset + 1);
+                    offset++;
+                }
+                return word;    //返回找到的词
+            }
+            int charComp = text.charAt(charIndex) - curNode.splitChar;  //比较两个字符
+
+            if (charComp == 0) {
+                charIndex++;
+            }
+        }
     }
 }
